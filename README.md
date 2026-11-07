@@ -51,10 +51,10 @@ A aplicação disponibiliza a rota principal para recepção e disparo de e-mail
 1. Clone este repositório:
 git clone [https://github.com/larissamonsalve/email-microservice.git](https://github.com/larissamonsalve/email-microservice.git)
 2. Configure a porta de execução no arquivo application.properties para rodar na porta 8090 (evitando conflito com o serviço de eventos):
-  ```bash
-  Properties
-  server.port=8090
-  ```
+    ```bash
+    Properties
+    server.port=8090
+    ```
 
 3. Execute a aplicação através da sua IDE (IntelliJ, Eclipse, VS Code) ou via terminal com Maven/Gradle:
     ```bash
