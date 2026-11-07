@@ -22,7 +22,7 @@ Microsserviço de suporte focado na comunicação assíncrona/externa da arquite
 
 ## Papel na Arquitetura de Microsserviços
 
-Este serviço atua de forma isolada e desacoplada, recebendo chamadas HTTP vindas do **events-microservice** via **Spring Cloud OpenFeign**. 
+Este serviço atua de forma isolada e desacoplada, recebendo chamadas HTTP vindas do **[events-microservice](https://github.com/larissamonsalve/events-microservice)** via **Spring Cloud OpenFeign**. 
 
 O fluxo de operação ocorre da seguinte forma:
 1. O serviço de eventos processa a inscrição de um participante e aciona seu cliente HTTP.
