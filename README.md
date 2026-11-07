@@ -1,4 +1,4 @@
-# 📧 Email Microservice (Java & Spring Boot)
+# Email Microservice (Java & Spring Boot)
 
 > Microsserviço de mensageria responsável pelo disparo de notificações e e-mails de confirmação, desenvolvido em Java utilizando o ecossistema Spring.
 
@@ -22,7 +22,7 @@ Microsserviço de suporte focado na comunicação assíncrona/externa da arquite
 
 ## Papel na Arquitetura de Microsserviços
 
-Este serviço atua de forma isolada e desacoplada, recebendo chamadas HTTP vindas do **Events Microservice** via **Spring Cloud OpenFeign**. 
+Este serviço atua de forma isolada e desacoplada, recebendo chamadas HTTP vindas do **events-microservice** via **Spring Cloud OpenFeign**. 
 
 O fluxo de operação ocorre da seguinte forma:
 1. O serviço de eventos processa a inscrição de um participante e aciona seu cliente HTTP.
@@ -54,10 +54,12 @@ git clone [https://github.com/larissamonsalve/email-microservice.git](https://gi
   ```bash
   Properties
   server.port=8090
+  ```
 
 3. Execute a aplicação através da sua IDE (IntelliJ, Eclipse, VS Code) ou via terminal com Maven/Gradle:
     ```bash
     ./mvnw spring-boot:run
+    ```
     
 ## Agradecimentos e Créditos
 
