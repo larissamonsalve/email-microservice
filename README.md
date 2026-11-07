@@ -1,68 +1,64 @@
-# Email Microservice
-## Uber Backend Challenge
+# 📧 Email Microservice (Java & Spring Boot)
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
+> Microsserviço de mensageria responsável pelo disparo de notificações e e-mails de confirmação, desenvolvido em Java utilizando o ecossistema Spring.
 
-This project is an API built using **Java, Java Spring, AWS Simple Email Service.**
+---
 
-The Microservice was developed for my [Youtube Channel](https://youtu.be/eFgeO9M9lLw?si=uyhUXrR-NLEpBW6p), to demonstrate how to solve the [Uber Backend Challenge](https://github.com/uber-archive/coding-challenge-tools/blob/master/coding_challenge.md).
+## Sobre o Projeto
 
-## Table of Contents
+Microsserviço de suporte focado na comunicação assíncrona/externa da arquitetura, responsável por receber requisições com os dados de disparo de e-mails (`payload`) e processar o envio das notificações para os participantes dos eventos.
 
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Database](#database)
-- [Contributing](#contributing)
+---
 
-## Installation
+## Tecnologias Utilizadas
 
-1. Clone the repository:
+* **Java** (Versão recente recomendada)
+* **Spring Boot**
+* **Spring Web** (@RestController, DTOs e Mapeamento de Rotas)
+* **Lombok** (Biblioteca de anotações para reduzir a escrita de códigos repetitivos)
+* **Maven** (Gerenciamento de dependências)
 
-```bash
-git clone https://github.com/Fernanda-Kipper/desafio-backend-uber.git
-```
+---
 
-2. Install dependencies with Maven
+## Papel na Arquitetura de Microsserviços
 
-3. Update `application.properties` puting your AWS Credentials
+Este serviço atua de forma isolada e desacoplada, recebendo chamadas HTTP vindas do **Events Microservice** via **Spring Cloud OpenFeign**. 
 
-```yaml
-aws.region=us-east-1
-aws.accessKeyId=1111111
-aws.secretKey=111111
-```
-## Usage
+O fluxo de operação ocorre da seguinte forma:
+1. O serviço de eventos processa a inscrição de um participante e aciona seu cliente HTTP.
+2. O **Email Service** recebe a requisição na porta configurada (`8090`), contendo o *payload* do e-mail com remetente, assunto e corpo da mensagem.
+3. A aplicação processa a solicitação de envio da notificação correspondente.
 
-1. Start the application with Maven
-2. The API will be accessible at http://localhost:8080
+--- 
 
-## API Endpoints
-The API provides the following endpoints:
+## Endpoints da API
 
-**GET EMAIL**
-```markdown
-POST /api/email/send - Send a e-mail from your sender to the destination
-```
+A aplicação disponibiliza a rota principal para recepção e disparo de e-mails:
 
-**BODY**
-```json
-{
-  "to": "liveskipperdev@gmail.com",
-  "subject": "teste",
-  "body": "teste"
-}
-```
-
-## Contributing
-
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request to the repository.
-
-When contributing to this project, please follow the existing code style, [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/), and submit your changes in a separate branch.
+### 1. Enviar E-mail de Notificação
+* **POST** `/api/email/send`
+* **Exemplo de Body (JSON):**
+  ```json
+  {
+    "to": "usuario@email.com",
+    "subject": "Confirmação de Inscrição no Evento",
+    "body": "Olá! Sua inscrição foi realizada com sucesso."
+  }
 
 
+## Como Executar O Projeto
 
+1. Clone este repositório:
+git clone [https://github.com/larissamonsalve/email-microservice.git](https://github.com/larissamonsalve/email-microservice.git)
+2. Configure a porta de execução no arquivo application.properties para rodar na porta 8090 (evitando conflito com o serviço de eventos):
+  ```bash
+  Properties
+  server.port=8090
 
+3. Execute a aplicação através da sua IDE (IntelliJ, Eclipse, VS Code) ou via terminal com Maven/Gradle:
+    ```bash
+    ./mvnw spring-boot:run
+    
+## Agradecimentos e Créditos
+
+Este projeto foi desenvolvido como parte dos estudos práticos acompanhando o conteúdo e a live de microsserviços com Java ministrada pela **Fernanda Kipper** ([Fernanda-Kipper](https://github.com/Fernanda-Kipper)). Todo o passo a passo da arquitetura e lógica inicial foi baseado nos ensinamentos compartilhados por ela.
